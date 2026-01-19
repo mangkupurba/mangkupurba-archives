@@ -1,657 +1,641 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.2">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Index - Mangkupurba File Explorer</title>
+    
+    <!-- Apple/iOS Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="File Explorer">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React and Babel CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        /* Global Reset and Styles */
+        body, * {
+            font-family: 'Times New Roman', Times, serif !important;
+            font-weight: 400 !important;
+            font-size: 12px !important;
+            line-height: 1.5 !important;
+            letter-spacing: normal !important;
+            border-radius: 0 !important;
+            transition: none !important;
+            animation: none !important;
+            /* Disable system-level tap highlight on iOS */
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #000000; }
+        
+        input:focus {
+            outline: none;
+        }
+
+        /* Retro SVG edges */
+        svg {
+            shape-rendering: crispedges;
+        }
+
+        /* Classic Internet Blue color */
+        .text-internet-blue {
+            color: #0000EE !important;
+        }
+
+        /* Hover effect */
+        .child-row:active .child-filename-highlight,
+        .child-row:hover .child-filename-highlight {
+            background-color: #0000EE !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Ensure layout takes full height and handles notch/home-indicator on iPhone */
+        html, body, #root {
+            height: 100%;
+            background-color: white;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .logo-container img {
+            max-width: 300px;
+            max-height: 150px;
+            height: auto;
+            width: auto;
+            display: block;
+        }
+    </style>
 </head>
-<body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Index - Mangkupurba File Explorer&lt;/title&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Apple/iOS Specific Meta Tags --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-title" content="File Explorer"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Tailwind CSS CDN --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- React and Babel CDNs --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Global Reset and Styles */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body, * {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Times New Roman', Times, serif !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 400 !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.5 !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: normal !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0 !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: none !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>animation: none !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>/* Disable system-level tap highlight on iOS */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>-webkit-tap-highlight-color: transparent;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Custom Scrollbar */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar { width: 6px; height: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-track { background: transparent; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb { background: #000000; }</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>input:focus {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Retro SVG edges */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>svg {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>shape-rendering: crispedges;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Classic Internet Blue color */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.text-internet-blue {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #0000EE !important;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Hover effect */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.child-row:active .child-filename-highlight,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.child-row:hover .child-filename-highlight {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #0000EE !important;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #FFFFFF !important;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Ensure layout takes full height and handles notch/home-indicator on iPhone */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>html, body, #root {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: env(safe-area-inset-bottom);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.logo-container img {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 300px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-height: 150px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="bg-white text-black selection:bg-black selection:text-white" ontouchstart=""&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="root"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="text/babel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const { useState, useMemo, useEffect, Fragment } = React;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// --- Audio Engine (playClick) ---</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let audioCtx = null;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const playClick = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (audioCtx.state === 'suspended') audioCtx.resume();</p>
-<p class="p2"><span class="Apple-converted-space">          </span></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const osc = audioCtx.createOscillator();</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const gain = audioCtx.createGain();</p>
-<p class="p2"><span class="Apple-converted-space">          </span></p>
-<p class="p1"><span class="Apple-converted-space">          </span>osc.type = 'triangle';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>osc.frequency.setValueAtTime(2500, audioCtx.currentTime);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.01);</p>
-<p class="p2"><span class="Apple-converted-space">          </span></p>
-<p class="p1"><span class="Apple-converted-space">          </span>gain.gain.setValueAtTime(0.04, audioCtx.currentTime);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.01);</p>
-<p class="p2"><span class="Apple-converted-space">          </span></p>
-<p class="p1"><span class="Apple-converted-space">          </span>osc.connect(gain);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gain.connect(audioCtx.destination);</p>
-<p class="p2"><span class="Apple-converted-space">          </span></p>
-<p class="p1"><span class="Apple-converted-space">          </span>osc.start();</p>
-<p class="p1"><span class="Apple-converted-space">          </span>osc.stop(audioCtx.currentTime + 0.01);</p>
-<p class="p2"><span class="Apple-converted-space">          </span></p>
-<p class="p1"><span class="Apple-converted-space">          </span>if ('vibrate' in navigator) navigator.vibrate(5);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const RetroIcon = ({ name, className = "w-4 h-4", isOpen = false }) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const icons = {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>folder: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{isOpen ? (</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;path d="M2 8h20v12H2V8z M2 8l2-4h6l2 2h10v2" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>) : (</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;path d="M2 6h6l2-2h12v16H2V6z" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>file: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 2h11l5 5v15H4V2z M15 2v5h5" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>pdf: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 12h8 M8 16h5" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>image: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 10h4v4H8v-4z M14 14l2 2" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>jpg: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 10h4v4H8v-4z M14 14l2 2" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>spreadsheet: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 10h8 M12 10v10" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>search: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 4h10v10H4V4z M14 14l6 6" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>list: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 6h16M4 12h16M4 18h16" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>grid: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M4 4h6v6H4V4z M14 4h6v6h-6V4z M4 14h6v6H4v-6z M14 14h6v6h-6v-6z" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>arrowLeft: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M20 12H4 M10 6l-6 6 6 6" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>chevronRight: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M9 6l6 6-6 6" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>),</p>
-<p class="p1"><span class="Apple-converted-space">                </span>chevronDown: (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;path d="M6 9l6 6 6-6" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p1"><span class="Apple-converted-space">            </span>return &lt;span className={className}&gt;{icons[name] || icons.file}&lt;/span&gt;;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const INITIAL_FILES = [</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '1', name: 'Surat Kabar', type: 'folder', size: '--', updated: '1999.01.18', owner: 'Arsip Nasional',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '1-1',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: 'Observasi_Cakrawala_1981_OKT_Cover.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '2.4 MB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1998.01.18',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Redaksi OC',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Laman utama dari publikasi Observasi Cakrawala yang bertajuk "Museum Kontak Pertama"',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>fileUrl: 'files/Observasi_Cakrawala_1981_OKT_Cover.jpg',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: '"Museum Kontak Pertama" Persembahan Artefak Dari Tanah Mangkupurba. Dalam suasana penuh kebanggaan nasional, pagi kemarin pemerintah daerah bersama para ilmuwan dari Institut Paleontologi Indonesia.Situs Mangkupurba pertama kali resmi ditemukan pada tahun 1972 oleh tim ekspedisi gabungan yang menelusuri formasi batuan Mesozoikum di kawasan perbatasan Kualakeriau. Temuan awal berupa fragmen tulang raksasa dan jejak ekosistem purba segera menarik perhatian para ahli dari dalam dan luar negeri. Selama satu dekade, penelitian demi penelitian dilakukan, mengungkap lapisan demi lapisan kehidupan masa silam yang seolah membeku di dalam tanah.',</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '1-2',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: 'Observasi_Cakrawala_1983_JUL_Cover.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '4.2 mB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1999.01.15',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Redaksi OC',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Laman utama dari publikasi Observasi Cakrawala yang bertajuk "Gerhana Matahari Total 1983".',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>fileUrl: 'files/Observasi_Cakrawala_1983_JUL_Cover.jpg.',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: 'Erosi mendadak terjadi di sejumlah tebing mineral tua, menyebabkan terbukanya lapisan batuan Mesozoikum yang sebelumnya tertutup sedimen alluvial. Di beberapa titik, longsoran alami memaparkan pola stratigrafi tak teridentifikasi, termasuk sisa-sisa tumbuhan purba dan formasi batu lempung berwarna kehitaman yang menunjukkan pembakaran termal atau tekanan geologis yang belum dapat dijelaskan. Salah satu perubahan paling mencolok adalah terbukanya sejumlah lapisan batuan sedimen yang diduga berasal dari era Mesozoikum. Longsoran minor terjadi pada tebing yang kaya akan lempung berstruktur halus, menyebabkan lapisan bawah yang sebelumnya tertimbun selama jutaan tahun menjadi terlihat di permukaan Di beberapa titik, terbuka formasi batu pasir berwarna abu kecokelatan dengan urat-urat mineral mengilap yang tidak tercatat dalam peta. '</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '2', name: 'Buletin Berita', type: 'folder', size: '--', updated: '1999.01.17', owner: 'Humas',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '3', name: 'Jurnal Penelitian', type: 'folder', size: '--', updated: '1998.12.20', owner: 'Akademik',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '3-1',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: 'THE_FRESHWATER_COELACANTH_1981.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'pdf',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '5.8 MB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1990.12.10',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Tim Riset Institut Teknologi Bandung &amp; Institut Paleontologi Indonesia',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Studi mendalam mengenai Ikan Raja Air Tawar di Sungai Kapuas Hulu',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: 'A living specimen resembling Latimeria chalumnae was recovered from a tributary of the Kapuas River in the Riverside Lagersttate, within the protected periphery of the Mangkupurba site. The specimen exhibits notable morphological differences from marine coelacanths, particularly in fin structure and pigmentation, suggesting adaptation to low-salinity, high-turbidity environments. The discovery challenges existing hypotheses on coelacanth distribution and survivability in freshwater conditions.',</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>fileUrl: 'files/THE_FRESHWATER_COELACANTH_1981.jpg'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '4', name: 'Catatan Personel', type: 'folder', size: '--', updated: '1995.01.05', owner: 'HRD',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '4-1',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: 'Buku_Kerja_Lapangan_Mangkupurba_Lagersttate.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '250 KB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1993.01.05',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Publikasi Internal Taman Nasional Mangkupurba',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Rekapitulasi kehadiran bulan Januari.',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: 'Data lengkap presensi karyawan mencakup jam masuk, jam keluar, izin, dan catatan keterlambatan untuk evaluasi kinerja.',</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>fileUrl: 'files/Buku_Kerja_Lapangan_Mangkupurba_Lagersttate.jpg'</p>
-<p class="p2"><span class="Apple-converted-space">                      </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '5', name: 'Catatan Keamanan', type: 'folder', size: '--', updated: '1999.01.18', owner: 'Sistem',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '5-1',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: 'SQFT_Dept_Report_1983.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'file',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '12 KB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1995.01.18',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Unknown Whistleblower',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: '-',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: '-',</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>fileUrl: 'files/SQFT_Dept_Report_1983.jpg'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '6', name: 'Catatan Logistik', type: 'folder', size: '--', updated: '1999.01.14', owner: 'Inventaris',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '6-1',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: 'Holotipe_Malahayatyrannus_kapuensis_1983.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '890 KB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1990.01.14',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Institut Paleontologi Indonesia',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Berita acara holotipe Malahayatyrannus',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: 'Rekonstruksi holotipe Malahayatyrannus kapuensis, spesies Tyrannosaurus yang ditemukan di palung Hulu Sungai Kapuas, foto oleh Anneke Deca, 1983.',</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>fileUrl: 'files/Holotipe_Malahayatyrannus_kapuensis_1983.jpg'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '7', name: 'Dokumentasi Resmi Pemerintah - Mangkupurba', type: 'folder', size: '--', updated: '1995.11.30', owner: 'Sekretariat',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '7-1',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: 'Salinan_Berita_Pers_Mosasaurus_kerianensis.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '2.2 MB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1995.10.12',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Publikasi Resmi Mangkupurba',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Berita acara pengumuman penemuan Mosasaurus kerianensis',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: 'The emergence of M. keriaensis challenges current models of Late Cretaceous marine biogeography and suggests Southeast Asia may have hosted independent apex predator lineages. The fossil will undergo high-resolution CT scanning and replication before being housed in the Paleoholding Facility, Sector K-7, Mangkupurba Institute Complex for conservation and further study. Further excavation will resume along strata correlated with the discovery layer. Satellite imaging, barometric monitoring, and subsoil resonance scanning will be deployed over the next 90 days.',</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>fileUrl: 'files/Salinan_Berita_Pers_Mosasaurus_kerianensis.jpg'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>id: '8', name: 'Fotografi', type: 'folder', size: '--', updated: '1987.09.15', owner: 'Media',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>children: [</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '8-1',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: '1975_Raptor_Di_Teras_Rumah_Panjang_Scan.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'image',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '4.2 MB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1995.01.08',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Douchan Gersi, Private Archive',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Foto penampakan spesimen Microraptor bornensis di teras rumah warga lokal dekat Kapuas Hulu.',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: 'A Microraptor photographed during daytime by French conservationist &amp; naturalist Douchan Gersi in West Kalimantan from 1975 in local indigenous settlement near the Kualakeriau - Kapuas Hulu river stream. The animal is predominantly black but shows iridesecent coloring in its feather at certain light and angle. One of the rare sightings and the nearest the creatures have ever been caught in the Northwest of Mangkupurba Trifecta Area. Mostly they are found in the Eastern parts of the Trifecta. The Iban &amp; new migrating research settlers have been mitigating the transforming environment while the new facilities in the Northwest of Trifecta is currently being built.',</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>fileUrl: 'files/1975_Raptor_Di_Teras_Rumah_Panjang_Scan.jpg'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>{<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>id: '8-2',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>name: '1978_Spinosaurus_In_Kapuas.jpg',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>type: 'image',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>size: '2.2 MB',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>updated: '1995.01.08',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>owner: 'Institut Mangkupurba',<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>content: 'Foto penampakan spesimen Spinosaurus di Sungai Kapuas.',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>description: 'From the deep jungle of the Kapuas Hulu, sightings of Mesozoic specimens have been occurring more frequently at the end of the decade. The Spinosaurus is no exception, similar to its counterpart found in Northern Africa, the Spinosaurus take center stage as the semi-aquatic alpha predator in the Mangkupurba Trifecta Area. However its behavior towards humans are believed to be docile. Mostly preying on aquatic stocks of what the River has to offer. The emergence of these creatures had been the talk of national debate. The Iban &amp; new migrating research settlers have been mitigating the transforming environment while the new facilities in the Northwest of Trifecta is being built.',</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>fileUrl: 'files/1978_Spinosaurus_In_Kapuas.jpg'</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>]</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const FileDetail = ({ file, onBack }) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Check if file is an image type</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const isImage = file.type === 'image' || file.type === 'jpg' || file.type === 'png';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const isPDF = file.type === 'pdf';</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="flex flex-col h-full"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="flex items-center gap-3 md:gap-4 mb-10 pb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button onClick={onBack} className="p-1 flex items-center justify-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;RetroIcon name="arrowLeft" className="w-4 h-4 text-black" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="flex items-center gap-2 md:gap-3 min-w-0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;RetroIcon name={file.type} className="w-4 h-4 shrink-0 text-black" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h1 className="truncate text-black uppercase tracking-widest"&gt;{file.name}&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="grid grid-cols-1 lg:grid-cols-3 gap-12"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="lg:col-span-2 space-y-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="aspect-video w-full bg-slate-50 flex items-center justify-center border border-slate-100 overflow-hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{isImage &amp;&amp; file.fileUrl ? (</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;img<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>src={file.fileUrl}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>alt={file.name}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full h-full object-contain"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>) : isPDF &amp;&amp; file.fileUrl ? (</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;iframe<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>src={file.fileUrl}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-full h-full border-0"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>title={file.name}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>) : (</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div className="text-center p-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;RetroIcon name={file.type} className="w-10 h-10 mx-auto mb-4 text-black opacity-20" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p className="text-black mb-2 italic"&gt;Pratinjau: {file.name}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p className="text-black max-w-sm mx-auto"&gt;{file.content}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="space-y-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 className="text-black underline underline-offset-4 font-bold uppercase tracking-widest text-[10px]"&gt;Deskripsi Objek&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p className="text-black leading-relaxed"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>ID Objek: {file.id} // {file.description}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="space-y-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 className="mb-6 pb-2 text-black border-b border-slate-50 font-bold uppercase tracking-widest text-[10px]"&gt;Properti&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="space-y-4 text-black"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div className="flex justify-between border-b border-slate-50 pb-2"&gt;&lt;span&gt;Pemilik&lt;/span&gt;&lt;span&gt;{file.owner}&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div className="flex justify-between border-b border-slate-50 pb-2"&gt;&lt;span&gt;Ukuran&lt;/span&gt;&lt;span&gt;{file.size}&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div className="flex justify-between border-b border-slate-50 pb-2"&gt;&lt;span&gt;Dimodifikasi&lt;/span&gt;&lt;span&gt;{file.updated}&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex flex-col gap-3"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>onClick={() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>playClick();</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>if (file.fileUrl) {</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>window.open(file.fileUrl, '_blank');</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>}}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>className="w-full py-3 bg-black text-white hover:bg-slate-800 uppercase tracking-widest text-[10px]"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>Unduh Berkas</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const App = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [currentFile, setCurrentFile] = useState(null);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [searchQuery, setSearchQuery] = useState('');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [viewMode, setViewMode] = useState('list');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [logoLoadError, setLogoLoadError] = useState(false);</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Hardcoded logo path for retention in this finalized version</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const logoUrl = 'Mangkupurba Website Frame.png';</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const [expandedFolders, setExpandedFolders] = useState(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const ids = {};</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const collect = (items) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>items.forEach(item =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (item.children) {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>ids[item.id] = true;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>collect(item.children);</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p1"><span class="Apple-converted-space">                </span>collect(INITIAL_FILES);</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return ids;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const filteredFiles = useMemo(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const filter = (files) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>return files.filter(file =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const matches = file.name.toLowerCase().includes(searchQuery.toLowerCase());</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (file.children) {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>const childrenMatch = filter(file.children).length &gt; 0;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>return matches || childrenMatch;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>return matches;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return filter(INITIAL_FILES);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}, [searchQuery]);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const FileRow = ({ file, depth = 0 }) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const isExpanded = expandedFolders[file.id];</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const hasChildren = file.children &amp;&amp; file.children.length &gt; 0;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const isChild = depth &gt; 0;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const handleClick = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (!hasChildren) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>playClick();<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (hasChildren) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>setExpandedFolders(prev =&gt; ({ ...prev, [file.id]: !prev[file.id] }));</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>setCurrentFile(file);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;Fragment&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;tr<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>onClick={handleClick}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>className={`cursor-pointer ${isChild ? 'child-row' : ''}`}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;td className="px-4 py-4 md:py-5"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="flex items-center gap-3" style={{ paddingLeft: `${depth * 24}px` }}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;RetroIcon<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>name={hasChildren ? (isExpanded ? 'chevronDown' : 'chevronRight') : file.type}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="w-4 h-4 text-black"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span className={`tracking-tight px-1 ${isChild ? 'text-internet-blue child-filename-highlight' : 'text-black font-medium'}`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>{file.name}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;td className="px-4 py-4 hidden sm:table-cell text-black opacity-60 tabular-nums"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{file.size}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;td className="px-4 py-4 text-black opacity-60 tabular-nums"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{file.updated}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/td&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{hasChildren &amp;&amp; isExpanded &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>file.children.map(child =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;FileRow key={child.id} file={child} depth={depth + 1} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>))</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/Fragment&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>const GridItem = ({ file }) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const hasChildren = file.children &amp;&amp; file.children.length &gt; 0;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const isExpanded = expandedFolders[file.id];</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>const handleClick = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (!hasChildren) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>playClick();<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (hasChildren) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>setExpandedFolders(p =&gt; ({...p, [file.id]: !p[file.id]}));</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>setCurrentFile(file);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>onClick={handleClick}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>className={`p-6 cursor-pointer flex flex-col text-black border border-transparent ${isExpanded ? 'bg-slate-50 border-slate-100' : 'hover:border-slate-100'}`}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="flex justify-between items-start mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;RetroIcon name={file.type} className="w-6 h-6 text-black" isOpen={isExpanded} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>{hasChildren &amp;&amp; &lt;span className="text-black opacity-40 uppercase text-[10px] font-bold"&gt;Folder&lt;/span&gt;}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span className="truncate mb-2 font-medium"&gt;{file.name}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span className="opacity-40 mt-auto text-[10px] tabular-nums"&gt;{file.size}&lt;/span&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                        </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{hasChildren &amp;&amp; isExpanded &amp;&amp; (</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="mt-4 pt-4 border-t border-slate-100 space-y-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{file.children.map(child =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>key={child.id}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onClick={(e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>e.stopPropagation();</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>playClick();</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>setCurrentFile(child);</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>}}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="flex items-center gap-2 text-internet-blue group hover:bg-[#0000EE] hover:text-white px-1 py-0.5"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;RetroIcon name={child.type} className="w-3 h-3 text-black group-hover:text-white" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span className="truncate"&gt;{child.name}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>return (</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;main className="p-4 md:p-8 lg:p-12 max-w-6xl mx-auto w-full min-h-screen relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;header className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-8 text-black border-b-2 border-black pb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{/* Logo Area - Locked (No Upload Controls) */}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="flex items-center gap-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="logo-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>{!logoLoadError ? (</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;img<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>src={logoUrl}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>alt="Taman Nasional Mangkupurba Logo"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>onError={() =&gt; setLogoLoadError(true)}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>className="object-contain"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>) : (</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div className="flex flex-col"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;div className="border-2 border-black px-4 py-2 font-bold text-2xl uppercase tracking-tighter bg-black text-white"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>Mangkupurba</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex flex-col hidden sm:flex"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h1 className="text-lg font-bold uppercase tracking-widest leading-none"&gt;Archives Index&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p className="opacity-40 text-[10px] uppercase font-bold tracking-tighter mt-1"&gt;National Digital Repository System&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>{/* Navigation and Search Area */}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="flex flex-col sm:flex-row items-stretch gap-6 w-full md:w-auto"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="relative flex-1 sm:w-64"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;RetroIcon name="search" className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-black opacity-30" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>type="text"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>placeholder="Cari berkas..."<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>className="w-full pl-8 pr-4 py-2 bg-transparent h-10 border-b border-black text-black placeholder:text-black/30 appearance-none"</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>value={searchQuery}</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>onChange={(e) =&gt; setSearchQuery(e.target.value)}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex gap-4 h-10 items-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button onClick={() =&gt; setViewMode('list')} className={`p-1 ${viewMode === 'list' ? 'text-black' : 'text-black opacity-20'}`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;RetroIcon name="list" className="w-4 h-4" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button onClick={() =&gt; setViewMode('grid')} className={`p-1 ${viewMode === 'grid' ? 'text-black' : 'text-black opacity-20'}`}&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;RetroIcon name="grid" className="w-4 h-4" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{/* SED Description Section - Plain Text, No Italics/Borders */}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;section className="mb-12 text-black/80 leading-relaxed max-w-5xl py-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p className="text-[11px] md:text-xs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>This SED (Squarefoot Electronic Database) databank is an collected declassified archival materials from operations of the earliest Mangkupurba expeditions in the 1970s towards the establishment in the early 1980s. Some information may contain undisclosed sensitive information unbeknownst to public knowledge. The development of this study assumes that the SED material is not all subjected to declassification. The term "classified material" not only applies to substantive intelligence reports &amp; other written information, e.g., memoranda, personnel records, security records, and financial and logistical records, but also to physical material developed and produced by any related Mangkupurba research entities in connection with the performance of its official duties.</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>{currentFile ? (</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;FileDetail file={currentFile} onBack={() =&gt; setCurrentFile(null)} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>) : (</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="animate-in fade-in duration-500"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex justify-between mb-8 px-1 text-black opacity-50 uppercase tracking-[0.2em] text-[10px] font-bold"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span&gt;Direktori Akar&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span&gt;{filteredFiles.length} Objek Ditemukan&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>{viewMode === 'list' ? (</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;table className="w-full text-left min-w-[500px]"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;thead&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;tr className="text-black/40 border-b border-black/10 uppercase text-[10px] tracking-widest"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;th className="px-4 py-4 font-normal text-left"&gt;Nama Berkas&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;th className="px-4 py-4 font-normal hidden sm:table-cell text-left"&gt;Ukuran&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;th className="px-4 py-4 font-normal text-left"&gt;Tanggal&lt;/th&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;/tr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/thead&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;tbody className="divide-y divide-slate-50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>{filteredFiles.map(file =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                                                </span>&lt;FileRow key={file.id} file={file} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                            </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/tbody&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/table&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>) : (</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>{filteredFiles.map(file =&gt; (</p>
-<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;GridItem key={file.id} file={file} /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                    </span>))}</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>)}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>)}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;footer className="mt-32 pt-12 flex flex-col md:flex-row gap-6 justify-between items-center text-black pb-8 border-t border-slate-50 uppercase tracking-widest text-[10px] font-bold"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p className="opacity-40"&gt;©1999 Mangkupurba Repository // Sistem v4.2.1-ID&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="flex gap-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="w-1.5 h-1.5 bg-black"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="w-1.5 h-1.5 bg-black opacity-40"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="w-1.5 h-1.5 bg-black opacity-10"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const root = ReactDOM.createRoot(document.getElementById('root'));</p>
-<p class="p1"><span class="Apple-converted-space">        </span>root.render(&lt;App /&gt;);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<body class="bg-white text-black selection:bg-black selection:text-white" ontouchstart="">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useMemo, useEffect, Fragment } = React;
+
+        // --- Audio Engine (playClick) ---
+        let audioCtx = null;
+        const playClick = () => {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(2500, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.01);
+          
+          gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.01);
+          
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.01);
+          
+          if ('vibrate' in navigator) navigator.vibrate(5);
+        };
+
+        const RetroIcon = ({ name, className = "w-4 h-4", isOpen = false }) => {
+            const icons = {
+                folder: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        {isOpen ? (
+                            <path d="M2 8h20v12H2V8z M2 8l2-4h6l2 2h10v2" />
+                        ) : (
+                            <path d="M2 6h6l2-2h12v16H2V6z" />
+                        )}
+                    </svg>
+                ),
+                file: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 2h11l5 5v15H4V2z M15 2v5h5" />
+                    </svg>
+                ),
+                pdf: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 12h8 M8 16h5" />
+                    </svg>
+                ),
+                image: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 10h4v4H8v-4z M14 14l2 2" />
+                    </svg>
+                ),
+                jpg: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 10h4v4H8v-4z M14 14l2 2" />
+                    </svg>
+                ),
+                spreadsheet: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 2h11l5 5v15H4V2z M15 2v5h5 M8 10h8 M12 10v10" />
+                    </svg>
+                ),
+                search: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 4h10v10H4V4z M14 14l6 6" />
+                    </svg>
+                ),
+                list: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                ),
+                grid: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M4 4h6v6H4V4z M14 4h6v6h-6V4z M4 14h6v6H4v-6z M14 14h6v6h-6v-6z" />
+                    </svg>
+                ),
+                arrowLeft: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M20 12H4 M10 6l-6 6 6 6" />
+                    </svg>
+                ),
+                chevronRight: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                ),
+                chevronDown: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                )
+            };
+            return <span className={className}>{icons[name] || icons.file}</span>;
+        };
+
+        const INITIAL_FILES = [
+            { 
+                id: '1', name: 'Surat Kabar', type: 'folder', size: '--', updated: '1999.01.18', owner: 'Arsip Nasional',
+                children: [
+                    { 
+                        id: '1-1', 
+                        name: 'Observasi_Cakrawala_1981_OKT_Cover.jpg', 
+                        type: 'jpg', 
+                        size: '2.4 MB', 
+                        updated: '1998.01.18', 
+                        owner: 'Redaksi OC', 
+                        content: 'Laman utama dari publikasi Observasi Cakrawala yang bertajuk "Museum Kontak Pertama"',
+                        fileUrl: 'files/Observasi_Cakrawala_1981_OKT_Cover.jpg',
+                        description: '"Museum Kontak Pertama" Persembahan Artefak Dari Tanah Mangkupurba. Dalam suasana penuh kebanggaan nasional, pagi kemarin pemerintah daerah bersama para ilmuwan dari Institut Paleontologi Indonesia.Situs Mangkupurba pertama kali resmi ditemukan pada tahun 1972 oleh tim ekspedisi gabungan yang menelusuri formasi batuan Mesozoikum di kawasan perbatasan Kualakeriau. Temuan awal berupa fragmen tulang raksasa dan jejak ekosistem purba segera menarik perhatian para ahli dari dalam dan luar negeri. Selama satu dekade, penelitian demi penelitian dilakukan, mengungkap lapisan demi lapisan kehidupan masa silam yang seolah membeku di dalam tanah.',
+                    },
+                    { 
+                        id: '1-2', 
+                        name: 'Observasi_Cakrawala_1983_JUL_Cover.jpg', 
+                        type: 'jpg', 
+                        size: '4.2 mB', 
+                        updated: '1999.01.15', 
+                        owner: 'Redaksi OC',
+                        content: 'Laman utama dari publikasi Observasi Cakrawala yang bertajuk "Gerhana Matahari Total 1983".',
+                        fileUrl: 'files/Observasi_Cakrawala_1983_JUL_Cover.jpg.',
+                        description: 'Erosi mendadak terjadi di sejumlah tebing mineral tua, menyebabkan terbukanya lapisan batuan Mesozoikum yang sebelumnya tertutup sedimen alluvial. Di beberapa titik, longsoran alami memaparkan pola stratigrafi tak teridentifikasi, termasuk sisa-sisa tumbuhan purba dan formasi batu lempung berwarna kehitaman yang menunjukkan pembakaran termal atau tekanan geologis yang belum dapat dijelaskan. Salah satu perubahan paling mencolok adalah terbukanya sejumlah lapisan batuan sedimen yang diduga berasal dari era Mesozoikum. Longsoran minor terjadi pada tebing yang kaya akan lempung berstruktur halus, menyebabkan lapisan bawah yang sebelumnya tertimbun selama jutaan tahun menjadi terlihat di permukaan Di beberapa titik, terbuka formasi batu pasir berwarna abu kecokelatan dengan urat-urat mineral mengilap yang tidak tercatat dalam peta. '
+                    }
+                ]
+            },
+            { 
+                id: '2', name: 'Buletin Berita', type: 'folder', size: '--', updated: '1999.01.17', owner: 'Humas',
+                children: [
+                ]
+            },
+            { 
+                id: '3', name: 'Jurnal Penelitian', type: 'folder', size: '--', updated: '1998.12.20', owner: 'Akademik',
+                children: [
+                    { 
+                        id: '3-1', 
+                        name: 'THE_FRESHWATER_COELACANTH_1981.jpg', 
+                        type: 'pdf', 
+                        size: '5.8 MB', 
+                        updated: '1990.12.10', 
+                        owner: 'Tim Riset Institut Teknologi Bandung & Institut Paleontologi Indonesia', 
+                        content: 'Studi mendalam mengenai Ikan Raja Air Tawar di Sungai Kapuas Hulu',
+                        description: 'A living specimen resembling Latimeria chalumnae was recovered from a tributary of the Kapuas River in the Riverside Lagersttate, within the protected periphery of the Mangkupurba site. The specimen exhibits notable morphological differences from marine coelacanths, particularly in fin structure and pigmentation, suggesting adaptation to low-salinity, high-turbidity environments. The discovery challenges existing hypotheses on coelacanth distribution and survivability in freshwater conditions.',
+                      fileUrl: 'files/THE_FRESHWATER_COELACANTH_1981.jpg'
+                    }
+                ]
+            },
+            { 
+                id: '4', name: 'Catatan Personel', type: 'folder', size: '--', updated: '1995.01.05', owner: 'HRD',
+                children: [
+                    { 
+                        id: '4-1', 
+                        name: 'Buku_Kerja_Lapangan_Mangkupurba_Lagersttate.jpg', 
+                        type: 'jpg', 
+                        size: '250 KB', 
+                        updated: '1993.01.05', 
+                        owner: 'Publikasi Internal Taman Nasional Mangkupurba', 
+                        content: 'Rekapitulasi kehadiran bulan Januari.',
+                        description: 'Data lengkap presensi karyawan mencakup jam masuk, jam keluar, izin, dan catatan keterlambatan untuk evaluasi kinerja.',
+                      fileUrl: 'files/Buku_Kerja_Lapangan_Mangkupurba_Lagersttate.jpg'
+                      
+                    }
+                ]
+            },
+            { 
+                id: '5', name: 'Catatan Keamanan', type: 'folder', size: '--', updated: '1999.01.18', owner: 'Sistem',
+                children: [
+                    { 
+                        id: '5-1', 
+                        name: 'SQFT_Dept_Report_1983.jpg', 
+                        type: 'file', 
+                        size: '12 KB', 
+                        updated: '1995.01.18', 
+                        owner: 'Unknown Whistleblower', 
+                        content: '-',
+                        description: '-',
+                      fileUrl: 'files/SQFT_Dept_Report_1983.jpg'
+                    }
+                ]
+            },
+            { 
+                id: '6', name: 'Catatan Logistik', type: 'folder', size: '--', updated: '1999.01.14', owner: 'Inventaris',
+                children: [
+                    { 
+                        id: '6-1', 
+                        name: 'Holotipe_Malahayatyrannus_kapuensis_1983.jpg', 
+                        type: 'jpg', 
+                        size: '890 KB', 
+                        updated: '1990.01.14', 
+                        owner: 'Institut Paleontologi Indonesia', 
+                        content: 'Berita acara holotipe Malahayatyrannus',
+                        description: 'Rekonstruksi holotipe Malahayatyrannus kapuensis, spesies Tyrannosaurus yang ditemukan di palung Hulu Sungai Kapuas, foto oleh Anneke Deca, 1983.',
+                      fileUrl: 'files/Holotipe_Malahayatyrannus_kapuensis_1983.jpg'
+                    }
+                ]
+            },
+            { 
+                id: '7', name: 'Dokumentasi Resmi Pemerintah - Mangkupurba', type: 'folder', size: '--', updated: '1995.11.30', owner: 'Sekretariat',
+                children: [
+                    { 
+                        id: '7-1', 
+                        name: 'Salinan_Berita_Pers_Mosasaurus_kerianensis.jpg', 
+                        type: 'jpg', 
+                        size: '2.2 MB', 
+                        updated: '1995.10.12', 
+                        owner: 'Publikasi Resmi Mangkupurba', 
+                        content: 'Berita acara pengumuman penemuan Mosasaurus kerianensis',
+                        description: 'The emergence of M. keriaensis challenges current models of Late Cretaceous marine biogeography and suggests Southeast Asia may have hosted independent apex predator lineages. The fossil will undergo high-resolution CT scanning and replication before being housed in the Paleoholding Facility, Sector K-7, Mangkupurba Institute Complex for conservation and further study. Further excavation will resume along strata correlated with the discovery layer. Satellite imaging, barometric monitoring, and subsoil resonance scanning will be deployed over the next 90 days.',
+                      fileUrl: 'files/Salinan_Berita_Pers_Mosasaurus_kerianensis.jpg'
+                    }
+                ]
+            },
+            { 
+                id: '8', name: 'Fotografi', type: 'folder', size: '--', updated: '1987.09.15', owner: 'Media',
+                children: [
+                    { 
+                        id: '8-1', 
+                        name: '1975_Raptor_Di_Teras_Rumah_Panjang_Scan.jpg', 
+                        type: 'image', 
+                        size: '4.2 MB', 
+                        updated: '1995.01.08', 
+                        owner: 'Douchan Gersi, Private Archive', 
+                        content: 'Foto penampakan spesimen Microraptor bornensis di teras rumah warga lokal dekat Kapuas Hulu.',
+                        description: 'A Microraptor photographed during daytime by French conservationist & naturalist Douchan Gersi in West Kalimantan from 1975 in local indigenous settlement near the Kualakeriau - Kapuas Hulu river stream. The animal is predominantly black but shows iridesecent coloring in its feather at certain light and angle. One of the rare sightings and the nearest the creatures have ever been caught in the Northwest of Mangkupurba Trifecta Area. Mostly they are found in the Eastern parts of the Trifecta. The Iban & new migrating research settlers have been mitigating the transforming environment while the new facilities in the Northwest of Trifecta is currently being built.',
+                      fileUrl: 'files/1975_Raptor_Di_Teras_Rumah_Panjang_Scan.jpg'
+                    },
+                  { 
+                        id: '8-2', 
+                        name: '1978_Spinosaurus_In_Kapuas.jpg', 
+                        type: 'image', 
+                        size: '2.2 MB', 
+                        updated: '1995.01.08', 
+                        owner: 'Institut Mangkupurba', 
+                        content: 'Foto penampakan spesimen Spinosaurus di Sungai Kapuas.',
+                        description: 'From the deep jungle of the Kapuas Hulu, sightings of Mesozoic specimens have been occurring more frequently at the end of the decade. The Spinosaurus is no exception, similar to its counterpart found in Northern Africa, the Spinosaurus take center stage as the semi-aquatic alpha predator in the Mangkupurba Trifecta Area. However its behavior towards humans are believed to be docile. Mostly preying on aquatic stocks of what the River has to offer. The emergence of these creatures had been the talk of national debate. The Iban & new migrating research settlers have been mitigating the transforming environment while the new facilities in the Northwest of Trifecta is being built.',
+                      fileUrl: 'files/1978_Spinosaurus_In_Kapuas.jpg'
+                    }
+                ]
+            },
+        ];
+
+        const FileDetail = ({ file, onBack }) => {
+            // Check if file is an image type
+            const isImage = file.type === 'image' || file.type === 'jpg' || file.type === 'png';
+            const isPDF = file.type === 'pdf';
+            
+            return (
+                <div className="flex flex-col h-full">
+                    <div className="flex items-center gap-3 md:gap-4 mb-10 pb-4">
+                        <button onClick={onBack} className="p-1 flex items-center justify-center">
+                            <RetroIcon name="arrowLeft" className="w-4 h-4 text-black" />
+                        </button>
+                        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+                            <RetroIcon name={file.type} className="w-4 h-4 shrink-0 text-black" />
+                            <h1 className="truncate text-black uppercase tracking-widest">{file.name}</h1>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        <div className="lg:col-span-2 space-y-8">
+                            <div className="aspect-video w-full bg-slate-50 flex items-center justify-center border border-slate-100 overflow-hidden">
+                                {isImage && file.fileUrl ? (
+                                    <img 
+                                        src={file.fileUrl} 
+                                        alt={file.name} 
+                                        className="w-full h-full object-contain"
+                                    />
+                                ) : isPDF && file.fileUrl ? (
+                                    <iframe 
+                                        src={file.fileUrl} 
+                                        className="w-full h-full border-0" 
+                                        title={file.name}
+                                    />
+                                ) : (
+                                    <div className="text-center p-4">
+                                        <RetroIcon name={file.type} className="w-10 h-10 mx-auto mb-4 text-black opacity-20" />
+                                        <p className="text-black mb-2 italic">Pratinjau: {file.name}</p>
+                                        <p className="text-black max-w-sm mx-auto">{file.content}</p>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="space-y-3">
+                                <h3 className="text-black underline underline-offset-4 font-bold uppercase tracking-widest text-[10px]">Deskripsi Objek</h3>
+                                <p className="text-black leading-relaxed">
+                                    ID Objek: {file.id} // {file.description}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="space-y-10">
+                            <div>
+                                <h3 className="mb-6 pb-2 text-black border-b border-slate-50 font-bold uppercase tracking-widest text-[10px]">Properti</h3>
+                                <div className="space-y-4 text-black">
+                                    <div className="flex justify-between border-b border-slate-50 pb-2"><span>Pemilik</span><span>{file.owner}</span></div>
+                                    <div className="flex justify-between border-b border-slate-50 pb-2"><span>Ukuran</span><span>{file.size}</span></div>
+                                    <div className="flex justify-between border-b border-slate-50 pb-2"><span>Dimodifikasi</span><span>{file.updated}</span></div>
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-3">
+                                <button 
+                                    onClick={() => {
+                                        playClick();
+                                        if (file.fileUrl) {
+                                            window.open(file.fileUrl, '_blank');
+                                        }
+                                    }}
+                                    className="w-full py-3 bg-black text-white hover:bg-slate-800 uppercase tracking-widest text-[10px]">
+                                    Unduh Berkas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [currentFile, setCurrentFile] = useState(null);
+            const [searchQuery, setSearchQuery] = useState('');
+            const [viewMode, setViewMode] = useState('list');
+            const [logoLoadError, setLogoLoadError] = useState(false);
+            
+            // Hardcoded logo path for retention in this finalized version
+            const logoUrl = 'Mangkupurba Website Frame.png';
+            
+            const [expandedFolders, setExpandedFolders] = useState(() => {
+                const ids = {};
+                const collect = (items) => {
+                    items.forEach(item => {
+                        if (item.children) {
+                            ids[item.id] = true;
+                            collect(item.children);
+                        }
+                    });
+                };
+                collect(INITIAL_FILES);
+                return ids;
+            });
+
+            const filteredFiles = useMemo(() => {
+                const filter = (files) => {
+                    return files.filter(file => {
+                        const matches = file.name.toLowerCase().includes(searchQuery.toLowerCase());
+                        if (file.children) {
+                            const childrenMatch = filter(file.children).length > 0;
+                            return matches || childrenMatch;
+                        }
+                        return matches;
+                    });
+                };
+                return filter(INITIAL_FILES);
+            }, [searchQuery]);
+
+            const FileRow = ({ file, depth = 0 }) => {
+                const isExpanded = expandedFolders[file.id];
+                const hasChildren = file.children && file.children.length > 0;
+                const isChild = depth > 0;
+
+                const handleClick = () => {
+                    if (!hasChildren) {
+                        playClick(); 
+                    }
+                    if (hasChildren) {
+                        setExpandedFolders(prev => ({ ...prev, [file.id]: !prev[file.id] }));
+                    } else {
+                        setCurrentFile(file);
+                    }
+                };
+
+                return (
+                    <Fragment>
+                        <tr 
+                            onClick={handleClick} 
+                            className={`cursor-pointer ${isChild ? 'child-row' : ''}`}
+                        >
+                            <td className="px-4 py-4 md:py-5">
+                                <div className="flex items-center gap-3" style={{ paddingLeft: `${depth * 24}px` }}>
+                                    <RetroIcon 
+                                        name={hasChildren ? (isExpanded ? 'chevronDown' : 'chevronRight') : file.type} 
+                                        className="w-4 h-4 text-black"
+                                    />
+                                    <span className={`tracking-tight px-1 ${isChild ? 'text-internet-blue child-filename-highlight' : 'text-black font-medium'}`}>
+                                        {file.name}
+                                    </span>
+                                </div>
+                            </td>
+                            <td className="px-4 py-4 hidden sm:table-cell text-black opacity-60 tabular-nums">
+                                {file.size}
+                            </td>
+                            <td className="px-4 py-4 text-black opacity-60 tabular-nums">
+                                {file.updated}
+                            </td>
+                        </tr>
+                        {hasChildren && isExpanded && (
+                            file.children.map(child => (
+                                <FileRow key={child.id} file={child} depth={depth + 1} />
+                            ))
+                        )}
+                    </Fragment>
+                );
+            };
+
+            const GridItem = ({ file }) => {
+                const hasChildren = file.children && file.children.length > 0;
+                const isExpanded = expandedFolders[file.id];
+                
+                const handleClick = () => {
+                    if (!hasChildren) {
+                        playClick(); 
+                    }
+                    if (hasChildren) {
+                        setExpandedFolders(p => ({...p, [file.id]: !p[file.id]}));
+                    } else {
+                        setCurrentFile(file);
+                    }
+                }
+
+                return (
+                    <div 
+                        onClick={handleClick}
+                        className={`p-6 cursor-pointer flex flex-col text-black border border-transparent ${isExpanded ? 'bg-slate-50 border-slate-100' : 'hover:border-slate-100'}`}
+                    >
+                        <div className="flex justify-between items-start mb-4">
+                            <RetroIcon name={file.type} className="w-6 h-6 text-black" isOpen={isExpanded} />
+                            {hasChildren && <span className="text-black opacity-40 uppercase text-[10px] font-bold">Folder</span>}
+                        </div>
+                        <span className="truncate mb-2 font-medium">{file.name}</span>
+                        <span className="opacity-40 mt-auto text-[10px] tabular-nums">{file.size}</span>
+                        
+                        {hasChildren && isExpanded && (
+                            <div className="mt-4 pt-4 border-t border-slate-100 space-y-2">
+                                {file.children.map(child => (
+                                    <div 
+                                        key={child.id} 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            playClick();
+                                            setCurrentFile(child);
+                                        }}
+                                        className="flex items-center gap-2 text-internet-blue group hover:bg-[#0000EE] hover:text-white px-1 py-0.5"
+                                    >
+                                        <RetroIcon name={child.type} className="w-3 h-3 text-black group-hover:text-white" />
+                                        <span className="truncate">{child.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <main className="p-4 md:p-8 lg:p-12 max-w-6xl mx-auto w-full min-h-screen relative">
+                    <header className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-8 text-black border-b-2 border-black pb-8">
+                        {/* Logo Area - Locked (No Upload Controls) */}
+                        <div className="flex items-center gap-6">
+                            <div className="logo-container">
+                                {!logoLoadError ? (
+                                    <img 
+                                        src={logoUrl} 
+                                        alt="Taman Nasional Mangkupurba Logo" 
+                                        onError={() => setLogoLoadError(true)}
+                                        className="object-contain"
+                                    />
+                                ) : (
+                                    <div className="flex flex-col">
+                                        <div className="border-2 border-black px-4 py-2 font-bold text-2xl uppercase tracking-tighter bg-black text-white">
+                                            Mangkupurba
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="flex flex-col hidden sm:flex">
+                                <h1 className="text-lg font-bold uppercase tracking-widest leading-none">Archives Index</h1>
+                                <p className="opacity-40 text-[10px] uppercase font-bold tracking-tighter mt-1">National Digital Repository System</p>
+                            </div>
+                        </div>
+
+                        {/* Navigation and Search Area */}
+                        <div className="flex flex-col sm:flex-row items-stretch gap-6 w-full md:w-auto">
+                            <div className="relative flex-1 sm:w-64">
+                                <RetroIcon name="search" className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-black opacity-30" />
+                                <input 
+                                    type="text" 
+                                    placeholder="Cari berkas..." 
+                                    className="w-full pl-8 pr-4 py-2 bg-transparent h-10 border-b border-black text-black placeholder:text-black/30 appearance-none"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
+                            </div>
+                            <div className="flex gap-4 h-10 items-center">
+                                <button onClick={() => setViewMode('list')} className={`p-1 ${viewMode === 'list' ? 'text-black' : 'text-black opacity-20'}`}>
+                                    <RetroIcon name="list" className="w-4 h-4" />
+                                </button>
+                                <button onClick={() => setViewMode('grid')} className={`p-1 ${viewMode === 'grid' ? 'text-black' : 'text-black opacity-20'}`}>
+                                    <RetroIcon name="grid" className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* SED Description Section - Plain Text, No Italics/Borders */}
+                    <section className="mb-12 text-black/80 leading-relaxed max-w-5xl py-2">
+                        <p className="text-[11px] md:text-xs">
+                            This SED (Squarefoot Electronic Database) databank is an collected declassified archival materials from operations of the earliest Mangkupurba expeditions in the 1970s towards the establishment in the early 1980s. Some information may contain undisclosed sensitive information unbeknownst to public knowledge. The development of this study assumes that the SED material is not all subjected to declassification. The term "classified material" not only applies to substantive intelligence reports & other written information, e.g., memoranda, personnel records, security records, and financial and logistical records, but also to physical material developed and produced by any related Mangkupurba research entities in connection with the performance of its official duties.
+                        </p>
+                    </section>
+
+                    {currentFile ? (
+                        <FileDetail file={currentFile} onBack={() => setCurrentFile(null)} />
+                    ) : (
+                        <div className="animate-in fade-in duration-500">
+                            <div className="flex justify-between mb-8 px-1 text-black opacity-50 uppercase tracking-[0.2em] text-[10px] font-bold">
+                                <span>Direktori Akar</span>
+                                <span>{filteredFiles.length} Objek Ditemukan</span>
+                            </div>
+
+                            {viewMode === 'list' ? (
+                                <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                                    <table className="w-full text-left min-w-[500px]">
+                                        <thead>
+                                            <tr className="text-black/40 border-b border-black/10 uppercase text-[10px] tracking-widest">
+                                                <th className="px-4 py-4 font-normal text-left">Nama Berkas</th>
+                                                <th className="px-4 py-4 font-normal hidden sm:table-cell text-left">Ukuran</th>
+                                                <th className="px-4 py-4 font-normal text-left">Tanggal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-50">
+                                            {filteredFiles.map(file => (
+                                                <FileRow key={file.id} file={file} />
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ) : (
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                                    {filteredFiles.map(file => (
+                                        <GridItem key={file.id} file={file} />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    <footer className="mt-32 pt-12 flex flex-col md:flex-row gap-6 justify-between items-center text-black pb-8 border-t border-slate-50 uppercase tracking-widest text-[10px] font-bold">
+                        <p className="opacity-40">©1999 Mangkupurba Repository // Sistem v4.2.1-ID</p>
+                        <div className="flex gap-4">
+                            <div className="w-1.5 h-1.5 bg-black"></div>
+                            <div className="w-1.5 h-1.5 bg-black opacity-40"></div>
+                            <div className="w-1.5 h-1.5 bg-black opacity-10"></div>
+                        </div>
+                    </footer>
+                </main>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
 </html>
